@@ -29,6 +29,8 @@
 	Snowpin Lee 07-05-17        Do modifications and Add APIs for AP Client
 */
 
+#include    <linux/sched/task.h>
+#include    <linux/sched/signal.h>
 #include    "rt_config.h"
 
 #ifdef WSC_INCLUDED

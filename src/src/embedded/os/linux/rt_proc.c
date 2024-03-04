@@ -29,8 +29,8 @@
 #include <linux/kernel.h>
 #include <linux/types.h>
 #include <linux/proc_fs.h>
+#include <linux/uaccess.h>
 #include <asm/uaccess.h>
-
 #include "rt_config.h"
 
 int wl_proc_init(void);
