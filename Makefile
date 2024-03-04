@@ -7,7 +7,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=mt7628
-PKG_VERSION:=4.4
+PKG_VERSION:=4.14
 
 PKG_KCONFIG:=RALINK_MT7628 \
 	MT_WIFI MT_WIFI_PATH FIRST_IF_EEPROM_PROM FIRST_IF_EEPROM_EFUSE \
@@ -32,7 +32,7 @@ define KernelPackage/mt7628
   CATEGORY:=MTK Properties
   TITLE:=MTK MT7628 wifi AP driver
   FILES:=$(PKG_BUILD_DIR)/build/mt7628.ko
-  DEPENDS:=@TARGET_ramips_mt7628 +mtk-basefiles +wireless-tools +uci2dat
+  DEPENDS:=@TARGET_ramips_mt76x8 +mtk-basefiles +wireless-tools +uci2dat
   SUBMENU:=Drivers
   MENU:=1
 endef
