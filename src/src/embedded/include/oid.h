@@ -42,7 +42,7 @@
 #define BAND_WIDTH_20		0
 #define BAND_WIDTH_40		1
 #define BAND_WIDTH_80		2
-#define BAND_WIDTH_BOTH	3
+#define BAND_WIDTH_BOTH	    3
 #define BAND_WIDTH_10		4	/* 802.11j has 10MHz. This definition is for internal usage. doesn't fill in the IE or other field. */
 
 
@@ -907,7 +907,7 @@ typedef struct _NDIS_802_11_CAPABILITY {
 	When use private ioctl oid get/set the configuration, we can use following flags to provide specific rules when handle the cmd
  */
 #define RTPRIV_IOCTL_FLAG_UI			0x0001	/* Notidy this private cmd send by UI. */
-#define RTPRIV_IOCTL_FLAG_NODUMPMSG	0x0002	/* Notify driver cannot dump msg to stdio/stdout when run this private ioctl cmd */
+#define RTPRIV_IOCTL_FLAG_NODUMPMSG	    0x0002	/* Notify driver cannot dump msg to stdio/stdout when run this private ioctl cmd */
 #define RTPRIV_IOCTL_FLAG_NOSPACE		0x0004	/* Notify driver didn't need copy msg to caller due to the caller didn't reserve space for this cmd */
 #endif /* DBG */
 

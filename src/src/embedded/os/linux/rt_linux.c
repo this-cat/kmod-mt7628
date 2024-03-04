@@ -935,7 +935,7 @@ int RtmpOSFileRead(RTMP_OS_FD osfd, char *pDataPtr, int readLen)
 {
 	/* The object must have a read method */
 	if (osfd->f_op) {
-		return __vfs_read(osfd, pDataPtr, readLen, &osfd->f_pos);
+        return kernel_read(osfd, pDataPtr, readLen, &osfd->f_pos);
 	} else {
 		MTWF_LOG(DBG_CAT_ALL, DBG_SUBCAT_ALL, DBG_LVL_ERROR, ("no file read method\n"));
 		return -1;
@@ -945,7 +945,7 @@ int RtmpOSFileRead(RTMP_OS_FD osfd, char *pDataPtr, int readLen)
 
 int RtmpOSFileWrite(RTMP_OS_FD osfd, char *pDataPtr, int writeLen)
 {
-	return osfd->f_op->write(osfd, pDataPtr, (size_t) writeLen, &osfd->f_pos);
+    return kernel_write(osfd, pDataPtr,(size_t) writeLen,&osfd->f_pos);
 }
 
 
