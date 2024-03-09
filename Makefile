@@ -28,16 +28,16 @@ include $(INCLUDE_DIR)/package.mk
 
 TAR_CMD=$(HOST_TAR) -C $(1)/ $(TAR_OPTIONS)
 
-define KernelPackage/mt7628
+define KernelPackage/$(PKG_NAME)
   CATEGORY:=MTK Properties
   TITLE:=MTK MT7628 wifi AP driver
-  FILES:=$(PKG_BUILD_DIR)/build/mt7628.ko
+  FILES:=$(PKG_BUILD_DIR)/build/$(PKG_NAME).ko
   DEPENDS:=@TARGET_ramips_mt76x8 +mtk-basefiles +wireless-tools +uci2dat
   SUBMENU:=Drivers
   MENU:=1
 endef
 
-define KernelPackage/mt7628/config
+define KernelPackage/$(PKG_NAME)/config
 	source "$(SOURCE)/config.in"
 endef
 
@@ -57,21 +57,21 @@ define Build/Compile
 		modules
 endef
 
-define KernelPackage/mt7628/install
+define KernelPackage/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/lib/wifi/
 	$(INSTALL_BIN) ./files/mt7628.sh $(1)/lib/wifi/
-	$(INSTALL_DIR) $(1)/etc/wireless/mt7628/
-	$(INSTALL_BIN) ./files/mt7628.dat $(1)/etc/wireless/mt7628/
+	$(INSTALL_DIR) $(1)/etc/wireless/$(PKG_NAME)/
+	$(INSTALL_BIN) ./files/mt7628.dat $(1)/etc/wireless/$(PKG_NAME)/
 	-if [ "$$(CONFIG_INTERNAL_PA_INTERNAL_LNA)" = "y" ]; then \
-		$(INSTALL_BIN) ./files/mt7628.eeprom.ipa.ilna.bin $(1)/etc/wireless/mt7628/mt7628.eeprom.bin; \
+		$(INSTALL_BIN) ./files/mt7628.eeprom.ipa.ilna.bin $(1)/etc/wireless/$(PKG_NAME)/mt7628.eeprom.bin; \
 	elif [ "$$(CONFIG_INTERNAL_PA_EXTERNAL_LNA)" = "y" ]; then \
-		$(INSTALL_BIN) ./files/mt7628.eeprom.ipa.elna.bin $(1)/etc/wireless/mt7628/mt7628.eeprom.bin; \
+		$(INSTALL_BIN) ./files/mt7628.eeprom.ipa.elna.bin $(1)/etc/wireless/$(PKG_NAME)/mt7628.eeprom.bin; \
 	elif [ "$$(CONFIG_EXTERNAL_PA_EXTERNAL_LNA)" = "y" ]; then \
-		$(INSTALL_BIN) ./files/mt7628.eeprom.epa.elna.bin $(1)/etc/wireless/mt7628/mt7628.eeprom.bin; \
+		$(INSTALL_BIN) ./files/mt7628.eeprom.epa.elna.bin $(1)/etc/wireless/$(PKG_NAME)/mt7628.eeprom.bin; \
 	else \
-		$(INSTALL_BIN) ./files/mt7628.eeprom.ipa.elna.bin $(1)/etc/wireless/mt7628/mt7628.eeprom.bin; \
+		$(INSTALL_BIN) ./files/mt7628.eeprom.ipa.elna.bin $(1)/etc/wireless/$(PKG_NAME)/mt7628.eeprom.bin; \
 	fi
-	echo $(PKG_VERSION) > $(1)/etc/wireless/mt7628/version
+	echo $(PKG_VERSION) > $(1)/etc/wireless/$(PKG_NAME)/version
 endef
 
-$(eval $(call KernelPackage,mt7628))
+$(eval $(call KernelPackage,$(PKG_NAME)))
